@@ -20,7 +20,7 @@ from os import path
 import sys
 
 def main() :
- print("\"{}\" - utility for detecting IPv4 packet headers in a file".format(path.basename(sys.argv[0])), file = sys.stderr)
+ print("PDetIPv4 - utility for detecting IPv4 packet headers in a file", file = sys.stderr)
  if len(sys.argv) < 4 :
   print("Syntax:\n {} <#bytes_before> <#bytes_after> <infile> [infiles]".format(path.basename(sys.argv[0])), file = sys.stderr)
   sys.exit(64)
