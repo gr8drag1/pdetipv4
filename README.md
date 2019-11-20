@@ -3,8 +3,8 @@ Utility for detecting IPv4 packet headers in dump files
 
 <table>
 <tbody>
-r1 : Initial release
-r2 : CLI arguement order changed to allow multiple files processing
+<tr><th>r1</th><td>Initial release</td></tr>
+<tr><th>r2</th><td>CLI arguement order changed to allow multiple files processing</td></tr>
 </tbody>
 </table>
 
