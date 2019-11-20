@@ -20,7 +20,42 @@ from os import path
 import sys
 
 def main() :
- print("PDetIPv4 - utility for detecting IPv4 packet headers in a file", file = sys.stderr)
+ """
+ PDetIPv4 - utility for detecting IPv4 packet headers in a file
+
+ Positional parameters
+ ---------------------
+  <#bytes_before> <#bytes_after> <infile> [infiles]
+
+  <#bytes_before> : integer
+   number of bytes in the file before the header to include in the output
+
+  <#bytes_after> : integer
+  number of bytes in the file after the header
+
+  <infile> [infiles] : string
+  file name(s)
+
+ Returns
+ -------
+  exit code
+  stdout
+
+  Exit code
+   64 in case of syntax error
+   No error code returned in case of file open error [because more than one file may be processed]
+
+  StdOut
+   offset in the file, byte values
+
+   Offset       Byte values
+   0x006d88d9 : 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 32
+
+ Raises
+ ------
+ None
+ """
+ print("PDetIPv4 - utility for detecting IPv4 packet headers in a file")
  if len(sys.argv) < 4 :
   print("Syntax:\n {} <#bytes_before> <#bytes_after> <infile> [infiles]".format(path.basename(sys.argv[0])), file = sys.stderr)
   sys.exit(64)
@@ -45,16 +80,10 @@ def main() :
        else :
         break
       else :
-#      print("@{:08x}".format(bofset), end = "")
-#      for i in bufval :
-#      print(":{:02x}".format(i), end = "")
        chksm = 0
        i = 0
        while i < bufnum :
         chksm += int.from_bytes(bufval[i:i+2], byteorder="big")
-#       for i in bufval :
-#        chksm += i if j == 0 else i << 8
-#        j = (j + 1) % 2
         while chksm > 0xffff :
          chksm -= 0xffff
         i += 2
@@ -97,5 +126,7 @@ def main() :
    except Exception as i:
     print("Error opening \"", sys.argv[j], "\": ", i.args[1], file = sys.stderr)
    j += 1
+ sys.exit(0)
+
 
 if __name__ == "__main__" : main()
